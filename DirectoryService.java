@@ -28,16 +28,15 @@ public class DirectoryService {
 
     }
 
-    public String setPeople(Person person) {
-        //Проверка на наличие
+    public String savePerson(Person person) {
         if(this.people.containsValue(person)){
             return "Такой пользователь не может быть добавлен, т.к. уже существует в системе";
         };
 
         this.people.put(person.getId(), person);
-        return "Персона" +
+        return "Персона\n" +
                 this.people.get(person.getId()).toString() +
-                "была добавлена в справочник";
+                "\nбыла успешно добавлена в справочник";
     }
 
     public String createPerson(String name, String secondName,
@@ -49,9 +48,34 @@ public class DirectoryService {
 
         try{
             Person newPerson = new Person(name, secondName, surname, ++id, phone, email);
-            return setPeople(newPerson);
+            return savePerson(newPerson);
         } catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    public String deletePerson(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Чтобы удалить персону, укажите его идентификатор:");
+        Integer idDeletePerson = Integer.parseInt(sc.nextLine());
+        if(this.people.containsKey(idDeletePerson)){
+            return this.people.remove(idDeletePerson).toString();
+        }
+        return "Пользователь с ID" + idDeletePerson + "не найден";
+    }
+
+    public void getAllPerson() {
+        System.out.println("Список всех персон содержащихся в справочнике:");
+        this.people.forEach((key, value) -> {
+            System.out.println(value.toString());
+        });
+    }
+
+    public String updatePerson() {
+        return "Изменить человека по ID";
+    }
+
+    public String searchPerson() {
+        return "Найти по имени (частичное совпадение)";
     }
 }

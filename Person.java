@@ -36,9 +36,9 @@ public class Person {
 
     @Override
     public String toString(){
-        return "ID " + id +
-                "; ФИО" + fullName()
-                + " [телефон: " + phone
+        return " ID-" + id +
+                "; ФИО: " + fullName()
+                + " [номер телефона: " + phone
                 + "; email: " + email + "]";
     }
 
