@@ -2,10 +2,9 @@ package ru.iman_burlyq.chatgpt.basic_сollections.people_guide;
 
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class DirectoryService {
@@ -112,6 +111,21 @@ public class DirectoryService {
     }
 
     public String searchPerson() {
-        return "Найти по имени (частичное совпадение)";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Для поиска персоны укажите часть ФИО:");
+        String searchItem = sc.nextLine();
+
+        List<Person> result = this.people.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .filter(person -> person.fullName().toLowerCase().contains(searchItem.toLowerCase()))
+                .toList();
+
+        if (result.isEmpty()) {
+            return "В справочнике не найдена персона с такими данными!\n\n";
+        } else {
+            return result.toString();
+        }
     }
+
+
 }

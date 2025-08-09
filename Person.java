@@ -24,6 +24,7 @@ public class Person {
         this.id = id;
         this.phone = Objects.requireNonNull(phone.replaceAll("\\D","").replaceAll("^7","8"),"Не указано телефон персоны");
         this.email = Objects.requireNonNull(email.matches("^[\\w-.]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$") ? email : null,"Не указан email персоны");
+//        this.email = Objects.requireNonNull(email,"requireNonNull");
     }
 
     public String fullName(){
