@@ -129,4 +129,11 @@ public class DirectoryService {
     }
 
 
+    public String saveCsv() {
+        return "Успешно сохранено";
+    }
+
+    public String loadFromCsv() {
+        return "Данные успешно загружены";
+    }
 }

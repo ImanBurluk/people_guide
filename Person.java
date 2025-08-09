@@ -37,8 +37,8 @@ public class Person {
 
     @Override
     public String toString(){
-        return " ID-" + id +
-                "; ФИО: " + fullName()
+        return " 🌐ID-" + id +
+                "; 😎ФИО: " + fullName()
                 + " [номер телефона: " + phone
                 + "; email: " + email + "]";
     }
