@@ -2,6 +2,12 @@ package ru.iman_burlyq.chatgpt.basic_сollections.people_guide;
 
 import lombok.NoArgsConstructor;
 
+import java.io.*;
+import java.nio.file.*;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -64,10 +70,11 @@ public class DirectoryService {
     }
 
     public void getAllPerson() {
-        System.out.println("Список всех персон содержащихся в справочнике:");
-        this.people.forEach((key, value) -> {
-            System.out.println(value.toString());
-        });
+        System.out.println("🧧Список всех персон содержащихся в справочнике:");
+        this.people.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .sorted(new PhoneComparator())
+                .forEach(person ->  System.out.println(person.toString()));
         System.out.println("===============================================\n");
     }
 
@@ -130,10 +137,39 @@ public class DirectoryService {
 
 
     public String saveCsv() {
-        return "Успешно сохранено";
+        String currentDir = System.getProperty("user.dir");
+        System.out.println(currentDir);
+        String fileName = "personOutput.csv";
+        String fullPath = currentDir + File.separator + fileName;
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fullPath))) {
+            writer.println("ID,Имя,Отчество,Фамилия,Телефон,Email");
+            for(Person person : this.people.values()) {
+                String line = String.format(
+                        "%d,%s,%s,%s,%s,%s",
+                        person.getId(),
+                        person.getName(),
+                        person.getSecondName(),
+                        person.getSurname(),
+                        person.getPhone(),
+                        person.getEmail()
+                );
+                writer.println(line);
+            }
+        } catch (IOException e){
+            System.err.println("Ошибка при сохранении в файл: " + e.getMessage());
+        }
+        return "Данные успешно сохранены в файл " + fileName;
     }
 
     public String loadFromCsv() {
         return "Данные успешно загружены";
+    }
+
+    class PhoneComparator implements Comparator<Person>{
+
+        public int compare(Person a, Person b){
+
+            return a.getSurname().toLowerCase().compareTo(b.getSurname().toLowerCase());
+        }
     }
 }

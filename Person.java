@@ -23,8 +23,8 @@ public class Person {
         this.surname = Objects.requireNonNull(surname.toLowerCase(),"Не указана фамилия персоны") ;
         this.id = id;
         this.phone = Objects.requireNonNull(phone.replaceAll("\\D","").replaceAll("^7","8"),"Не указано телефон персоны");
-        this.email = Objects.requireNonNull(email.matches("^[\\w-.]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$") ? email : null,"Не указан email персоны");
-//        this.email = Objects.requireNonNull(email,"requireNonNull");
+//        this.email = Objects.requireNonNull(email.matches("^[\\w-.]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$") ? email : null,"Не указан email персоны");
+        this.email = Objects.requireNonNull(email,"requireNonNull");
     }
 
     public String fullName(){
@@ -38,9 +38,9 @@ public class Person {
     @Override
     public String toString(){
         return " 🌐ID-" + id +
-                "; 😎ФИО: " + fullName()
-                + " [номер телефона: " + phone
-                + "; email: " + email + "]";
+                "; 😶ФИО: " + fullName()
+                + " [📞номер телефона: " + phone
+                + "; 📟email: " + email + "]";
     }
 
 }
