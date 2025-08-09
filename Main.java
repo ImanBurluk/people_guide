@@ -31,7 +31,7 @@ public class Main {
             String choice = sc.nextLine();
             switch (choice) {
                 case "1": {
-                    System.out.println(directoryService.addPersone());
+                    System.out.println(directoryService.addPerson());
                     getMenu();
                     continue;
                 }

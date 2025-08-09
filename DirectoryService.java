@@ -4,7 +4,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class DirectoryService {
@@ -12,7 +11,7 @@ public class DirectoryService {
     Map<Integer, Person> people = new HashMap<>();
     Integer id = 0;
 
-    public String addPersone() {
+    public String addPerson() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Для добавления пользователя необходимо ввести следующие данные:");
         System.out.println("Введите имя:");
@@ -57,7 +56,9 @@ public class DirectoryService {
         System.out.println("Чтобы удалить персону, укажите его идентификатор:");
         Integer idDeletePerson = Integer.parseInt(sc.nextLine());
         if (this.people.containsKey(idDeletePerson)) {
-            return this.people.remove(idDeletePerson).toString();
+            return "Персона " +
+                    this.people.remove(idDeletePerson).toString()
+                    + "\nбыла удалена из справочника!\n";
         }
         return "Пользователь с ID" + idDeletePerson + "не найден";
     }
