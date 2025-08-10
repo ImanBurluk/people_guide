@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class DirectoryService {
@@ -70,6 +71,10 @@ public class DirectoryService {
     }
 
     public void getAllPerson() {
+        if (people.isEmpty()) {
+            System.out.println("Справочник пуст❗\n");
+            return;
+        }
         System.out.println("🧧Список всех персон содержащихся в справочнике:");
         this.people.entrySet().stream()
                 .map(Map.Entry::getValue)
@@ -162,14 +167,48 @@ public class DirectoryService {
     }
 
     public String loadFromCsv() {
-        return "Данные успешно загружены";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Укажите полный путь к файлу");
+        String absolutePath = sc.nextLine();
+
+        if(absolutePath.isEmpty()){
+            System.out.println("Укажите полный путь к файлу!");
+        }
+
+        try {
+            List<Person> newPerson = Files.lines(Paths.get(absolutePath))
+                    .skip(1)
+                    .filter(line -> !line.trim().isEmpty())
+                    .map(this::lineToPerson)
+                    .filter(Objects::nonNull)
+                    .toList();
+
+            for(Person person : newPerson){
+                people.put(++id, person);
+            }
+
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+
+        return "Данные были успешно загружены!\n";
     }
 
-    class PhoneComparator implements Comparator<Person>{
+    static class PhoneComparator implements Comparator<Person>{
 
         public int compare(Person a, Person b){
 
             return a.getSurname().toLowerCase().compareTo(b.getSurname().toLowerCase());
+        }
+    }
+
+    private Person lineToPerson(String line){
+        try {
+           String[] parts = line.split(",", -1);
+           return new Person(parts[1],parts[2],parts[3],
+                   Integer.parseInt(parts[0]),parts[4],parts[5]);
+        } catch(Exception e){
+            return null;
         }
     }
 }
