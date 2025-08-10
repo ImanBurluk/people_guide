@@ -18,7 +18,8 @@
 Исполняемый JAR-файл телефонного справочника. 
 Его можно скачать и запустить командой 
 ```cmd
-chcp 65001 && java -jar phonebook-1.0.jar.
+chcp 65001
+java -jar phonebook-1.0.jar.
 ```
 
 [📥 Скачать JRE 19 для Windows](https://adoptium.net/download?link=https%3A%2F%2Fgithub.com%2Fadoptium%2Ftemurin19-binaries%2Freleases%2Fdownload%2Fjdk-19.0.2%252B7%2FOpenJDK19U-jre_x64_windows_hotspot_19.0.2_7.msi&vendor=Adoptium)

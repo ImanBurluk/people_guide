@@ -1,10 +1,10 @@
-package ru.iman_burlyq.chatgpt.basic_сollections.people_guide;
-
 import java.util.Scanner;
 
 public class Main {
 
     static public void getMenu() {
+        System.setProperty("file.encoding", "UTF-8");
+
         System.out.println("""
                     ================= МЕНЮ =================
                     1. Добавить человека

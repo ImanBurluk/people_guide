@@ -1,5 +1,3 @@
-package ru.iman_burlyq.chatgpt.basic_сollections.people_guide;
-
 import lombok.NoArgsConstructor;
 
 import java.io.*;
