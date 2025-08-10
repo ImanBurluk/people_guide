@@ -16,5 +16,8 @@
 --------------------
 ## [Скачать phonebook-1.0.jar](https://github.com/ImanBurluk/people_guide/releases/download/v1.0/phonebook-1.0.jar)
 Исполняемый JAR-файл телефонного справочника. 
-Его можно скачать и запустить командой java -jar phonebook-1.0.jar.
+Его можно скачать и запустить командой 
+```cmd
+java -jar phonebook-1.0.jar.
+```
 
